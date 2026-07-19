@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Feed Goblin</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <h1>Feed Goblin</h1>
+
+    <label class="toggle-row">
+      <span>Enabled</span>
+      <input type="checkbox" id="enabledToggle" />
+    </label>
+
+    <button id="openFeeds">Open Live Feed</button>
+
+    <div class="hotkeys">
+      <h2>Hotkeys (on a camera page)</h2>
+      <ul>
+        <li><kbd>1</kbd>&ndash;<kbd>4</kbd> switch camera</li>
+        <li><kbd>5</kbd> multi-view</li>
+        <li><kbd>Q</kbd> / <kbd>W</kbd> / <kbd>E</kbd> pan audio left / center / right</li>
+        <li><kbd>F</kbd> fullscreen</li>
+      </ul>
+    </div>
+
+    <p class="status" id="status"></p>
+
+    <p class="disclaimer">
+      Independent, unofficial fan tool — not affiliated with, endorsed by, or
+      sponsored by any network or streaming service. Adds viewing controls to a
+      page you already have access to; collects no data. Use at your own risk.
+    </p>
+
+    <details class="advanced">
+      <summary>Advanced</summary>
+
+      <label class="toggle-row">
+        <span>Custom config</span>
+        <input type="checkbox" id="customConfig" />
+      </label>
+      <p class="remote-hint">Off = built-in look. On = load your <code>config.json</code> for custom colors and size. <a href="https://github.com/jakchagu/feed-goblin#customizing-the-look" target="_blank" rel="noreferrer">How to set it up &rarr;</a></p>
+
+      <label class="toggle-row">
+        <span>Remote control (local API)</span>
+        <input type="checkbox" id="remoteToggle" />
+      </label>
+
+      <div class="port-row" id="portRow" hidden>
+        <label for="remotePort">Bridge port</label>
+        <input type="number" id="remotePort" min="1" max="65535" step="1" />
+      </div>
+
+      <p class="remote-hint">Off by default. A loopback HTTP endpoint any client can call — a Stream Deck, Home Assistant, a script. Needs the local bridge running — see <code>bridge/README.md</code>; the port must match the bridge's <code>config.json</code>.</p>
+    </details>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

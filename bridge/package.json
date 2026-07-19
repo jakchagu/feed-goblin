@@ -1,0 +1,14 @@
+{
+  "name": "feed-goblin-bridge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local-only HTTP -> WebSocket bridge so a Stream Deck can control the Feed Goblin extension.",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

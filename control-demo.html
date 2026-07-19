@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feed Goblin — control demo</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #0b0e14; color: #cfc6e8;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  .wrap { min-height: 100%; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 18px; padding: 24px; box-sizing: border-box; }
+  .hint { font-size: 14px; color: #8b8398; text-align: center; margin: 0; }
+  .hint b { color: #cfc6e8; font-weight: 600; }
+  /* the "multi-view": a 2x2 dark grid with a seam, so the control has context */
+  .stage { position: relative; width: min(760px, 92vw); aspect-ratio: 16 / 9;
+    border-radius: 12px; overflow: hidden; border: 1px solid #23202e;
+    background:
+      linear-gradient(#12331d, #0e2417) 0 0 / 50% 50% no-repeat,
+      linear-gradient(#0f2c1b, #0c2014) 100% 0 / 50% 50% no-repeat,
+      linear-gradient(#0e2718, #0b1d12) 0 100% / 50% 50% no-repeat,
+      linear-gradient(#103019, #0d2315) 100% 100% / 50% 50% no-repeat,
+      #0b0e14; }
+  .stage::before, .stage::after { content: ''; position: absolute; background: rgba(0,0,0,.45); }
+  .stage::before { left: 50%; top: 0; bottom: 0; width: 2px; transform: translateX(-1px); }
+  .stage::after  { top: 50%; left: 0; right: 0; height: 2px; transform: translateY(-1px); }
+  .status { font-size: 13px; color: #8b8398; margin: 0; }
+  .status b { color: #41d914; font-weight: 600; }
+
+  /* ---- ported verbatim from the extension (page-inject.js), only the bar is
+     centered in .stage instead of fixed to the viewport ---- */
+  #feedcompanion-audio-bar { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    z-index: 10; display: flex; flex-direction: column; align-items: center;
+    --fc-q: calc(max(11px, 3.25vmin) * var(--fc-scale, 1));
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    user-select: none; -webkit-user-select: none; }
+  #feedcompanion-audio-bar.fc-open { --fc-q: calc(max(56px, 11vmin) * var(--fc-scale, 1)); }
+  #feedcompanion-audio-bar .fc-quad { width: var(--fc-q); height: var(--fc-q); display: block;
+    cursor: pointer; filter: drop-shadow(0 2px 7px rgba(0,0,0,0.5));
+    transition: width .18s ease, height .18s ease; }
+  #feedcompanion-audio-bar .fc-frame { fill: var(--fc-frame, #2d1b4e); }
+  #feedcompanion-audio-bar .fc-cell { fill: var(--fc-cell-off, #241640); stroke: var(--fc-cell-stroke, #cfc6e8); stroke-width: 3;
+    transition: fill .14s ease, stroke .14s ease; }
+  #feedcompanion-audio-bar .fc-cell.on { fill: var(--fc-active, #41d914); stroke: var(--fc-active, #41d914); }
+  #feedcompanion-audio-bar .fc-zone { fill: transparent; cursor: pointer; }
+  #feedcompanion-audio-bar .fc-labels { position: absolute; top: 100%; left: 50%;
+    transform: translateX(-50%); padding-top: 6px; display: flex; gap: 5px; opacity: 0;
+    pointer-events: none; white-space: nowrap; transition: opacity .16s ease; }
+  #feedcompanion-audio-bar.fc-open .fc-labels { opacity: 1; pointer-events: auto; }
+  #feedcompanion-audio-bar .fc-labels span { font-size: calc(14px * var(--fc-scale, 1)); font-weight: 600; color: var(--fc-label-text, #cfc6e8);
+    background: var(--fc-label-bg, rgba(45,27,78,0.82)); padding: calc(7px * var(--fc-scale, 1)) calc(16px * var(--fc-scale, 1)); border-radius: 6px; cursor: pointer;
+    white-space: nowrap; text-shadow: 0 1px 2px rgba(0,0,0,0.6); }
+  #feedcompanion-audio-bar .fc-labels span:hover { background: rgba(255,255,255,0.12); }
+  #feedcompanion-audio-bar .fc-labels span.on { background: var(--fc-active, #41d914); color: var(--fc-active-text, #0c2a06); text-shadow: none; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="hint"><b>Hover</b> the grid on the seam to expand it &middot; <b>click</b> a side to pick the channel</p>
+    <div class="stage" id="stage"></div>
+    <p class="status">Channel: <b id="mode-out">center</b></p>
+  </div>
+
+<script>
+// ---- ported from page-inject.js: buildAudioUI + updateAudioUI + hover-intent ----
+(function () {
+  const SVGNS = 'http://www.w3.org/2000/svg';
+  const svgEl = (tag, attrs) => {
+    const el = document.createElementNS(SVGNS, tag);
+    for (const k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  };
+
+  let audioMode = 'center';
+  const out = document.getElementById('mode-out');
+
+  const bar = document.createElement('div');
+  bar.id = 'feedcompanion-audio-bar';
+
+  // hover-intent: open on enter, close on leave after a short delay
+  let closeTimer;
+  const openUI = () => { clearTimeout(closeTimer); bar.classList.add('fc-open'); };
+  const closeUI = () => { clearTimeout(closeTimer); closeTimer = setTimeout(() => bar.classList.remove('fc-open'), 250); };
+  bar.addEventListener('mouseenter', openUI);
+  bar.addEventListener('mouseleave', closeUI);
+  const pick = (mode) => { setAudioMode(mode); clearTimeout(closeTimer); bar.classList.remove('fc-open'); };
+
+  const svg = svgEl('svg', { viewBox: '0 0 120 120', class: 'fc-quad' });
+  svg.appendChild(svgEl('rect', { x: 1, y: 1, width: 118, height: 118, rx: 16, class: 'fc-frame' }));
+  [[8, 8], [64, 8], [8, 64], [64, 64]].forEach(([x, y]) =>
+    svg.appendChild(svgEl('rect', { x, y, width: 48, height: 48, rx: 10, class: 'fc-cell' }))
+  );
+  [['left', 0, 52], ['center', 52, 16], ['right', 68, 52]].forEach(([mode, x, w]) => {
+    const z = svgEl('rect', { x, y: 0, width: w, height: 120, class: 'fc-zone', 'data-mode': mode });
+    z.addEventListener('click', () => pick(mode));
+    svg.appendChild(z);
+  });
+  bar.appendChild(svg);
+
+  const labels = document.createElement('div');
+  labels.className = 'fc-labels';
+  [['left', 'Left'], ['center', 'Center'], ['right', 'Right']].forEach(([mode, word]) => {
+    const s = document.createElement('span');
+    s.dataset.mode = mode;
+    s.textContent = word;
+    s.addEventListener('click', () => pick(mode));
+    labels.appendChild(s);
+  });
+  bar.appendChild(labels);
+
+  document.getElementById('stage').appendChild(bar);
+
+  function setAudioMode(mode) { audioMode = mode; updateAudioUI(); }
+  function updateAudioUI() {
+    const lit = { left: [0, 2], center: [0, 1, 2, 3], right: [1, 3] }[audioMode] || [];
+    bar.querySelectorAll('.fc-cell').forEach((cell, i) => cell.classList.toggle('on', lit.indexOf(i) > -1));
+    bar.querySelectorAll('.fc-labels span').forEach((s) => s.classList.toggle('on', s.dataset.mode === audioMode));
+    out.textContent = audioMode;
+  }
+  updateAudioUI();
+})();
+</script>
+</body>
+</html>

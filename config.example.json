@@ -1,0 +1,13 @@
+{
+  "_comment": "Copy this file to config.json (same folder) and edit. Turn on 'Custom config' in the Feed Goblin popup to load it; toggle it off/on to re-apply after edits. Every key is optional — omit one to keep the built-in default. 'scale' multiplies the control's size (1 = default, 1.5 = 50% bigger). Colors accept any CSS color.",
+  "scale": 1,
+  "colors": {
+    "frame": "#2d1b4e",
+    "cellOff": "#241640",
+    "cellStroke": "#cfc6e8",
+    "active": "#41d914",
+    "activeText": "#0c2a06",
+    "labelText": "#cfc6e8",
+    "labelBg": "rgba(45,27,78,0.82)"
+  }
+}

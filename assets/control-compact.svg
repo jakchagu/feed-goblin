@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -8 136 136" width="136" height="136">
+  <!-- Feed Goblin on-screen control — COMPACT state, Left channel active.
+       Rendered from the real extension geometry/colors (page-inject.js). -->
+  <defs>
+    <filter id="s" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3.5"/>
+      <feOffset dy="2" result="off"/>
+      <feFlood flood-color="#000000" flood-opacity="0.5"/>
+      <feComposite in2="off" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#s)">
+    <rect x="1" y="1" width="118" height="118" rx="16" fill="#2d1b4e"/>
+    <!-- left column lit (green), right column dark -->
+    <rect x="8"  y="8"  width="48" height="48" rx="10" fill="#41d914" stroke="#41d914" stroke-width="3"/>
+    <rect x="64" y="8"  width="48" height="48" rx="10" fill="#241640" stroke="#cfc6e8" stroke-width="3"/>
+    <rect x="8"  y="64" width="48" height="48" rx="10" fill="#41d914" stroke="#41d914" stroke-width="3"/>
+    <rect x="64" y="64" width="48" height="48" rx="10" fill="#241640" stroke="#cfc6e8" stroke-width="3"/>
+  </g>
+</svg>

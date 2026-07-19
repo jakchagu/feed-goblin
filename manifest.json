@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "Feed Goblin",
+  "version": "1.0.0",
+  "description": "Independent, unofficial fan tool: camera-switch hotkeys and audio balance for a live video feed.",
+  "icons": {
+    "16": "src/icons/icon.png",
+    "32": "src/icons/icon.png",
+    "48": "src/icons/icon.png",
+    "128": "src/icons/icon.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "src/icons/icon.png",
+      "32": "src/icons/icon.png",
+      "48": "src/icons/icon.png",
+      "128": "src/icons/icon.png"
+    },
+    "default_popup": "src/popup/popup.html"
+  },
+  "permissions": ["storage", "tabs", "alarms"],
+  "background": {
+    "service_worker": "src/background/service-worker.js"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' ws://127.0.0.1:*"
+  },
+  "host_permissions": ["https://www.paramountplus.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.paramountplus.com/shows/big_brother/*", "https://www.paramountplus.com/shows/big-brother/*"],
+      "js": ["src/content/discover.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://www.paramountplus.com/live-tv/stream/big_brother/*"],
+      "js": ["src/content/content-script.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["src/content/page-inject.js", "config.json"],
+      "matches": ["https://www.paramountplus.com/*"]
+    }
+  ]
+}
