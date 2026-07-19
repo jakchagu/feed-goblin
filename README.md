@@ -50,7 +50,7 @@ Drive audio L/C/R, fullscreen, and jump-to-Big-Brother from any HTTP client (a S
 
 Feed Goblin isn't on the Chrome Web Store, so you load it manually. This repository (`github.com/jakchagu/feed-goblin`) is the only place I've uploaded it.
 
-1. Click the green **`<> Code`** button (top of this page) → **Download ZIP**.
+1. **[Download ZIP](https://github.com/jakchagu/feed-goblin/archive/refs/heads/main.zip)**.
 2. Right-click the downloaded ZIP → **Extract All...**
 3. Click **Extract**.
 4. Open `chrome://extensions` (or `edge://extensions`).
