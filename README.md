@@ -15,7 +15,7 @@ Jump between cameras with a keypress, pick which camera you hear on the multi-vi
 
 </div>
 
-> **Unofficial fan tool** — not affiliated with or endorsed by Paramount+, CBS, or Big Brother. Needs your own active Paramount+ subscription. It only restyles the player on a page you already have access to — no unlocking, downloading, re-streaming, recording, or data collection — and may conflict with Paramount+'s Terms of Service, so use at your own risk. MIT-licensed, as-is.
+> **Unofficial fan tool** — not affiliated with or endorsed by Paramount+, CBS, or Big Brother. Needs your own active Paramount+ subscription. It only restyles the player on a page you already have access to — no unlocking, downloading, re-streaming, recording, or data collection — and may conflict with Paramount+'s Terms of Service, so use at your own risk. Because it's unofficial, please don't contact Paramount+ support about it — if the site is misbehaving, turn Feed Goblin off first. MIT-licensed, as-is.
 
 ---
 
