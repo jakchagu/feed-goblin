@@ -56,9 +56,10 @@ Feed Goblin isn't on the Chrome Web Store, so you load it manually. This reposit
 4. Open `chrome://extensions` (or `edge://extensions`).
 5. Turn on **Developer mode** (top-right).
 6. Click **Load unpacked**.
-7. Select the unzipped folder (the one containing `manifest.json`).
-8. Click the **Select Folder** button.
-9. Pin the extension (puzzle-piece icon → pin).
+7. Go to your **Downloads** folder.
+8. Select the unzipped folder (the one containing `manifest.json`).
+9. Click the **Select Folder** button.
+10. Pin the extension (puzzle-piece icon → pin).
 
 <p align="center">
   <img src="assets/install-dev-mode.png" alt="chrome://extensions with Developer mode and Load unpacked highlighted" width="100%">
