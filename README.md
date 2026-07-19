@@ -88,7 +88,7 @@ Feed Goblin isn't on the Chrome Web Store, so you load it manually. This reposit
    | `1`–`4` | Switch to camera 1–4 |
    | `5` | Multi-view (quad) |
    | `Q` / `W` / `E` | Audio: left / center / right *(multi-view)* |
-   | `F` | Fullscreen |
+   | `F11` | Fullscreen Toggle |
 
 The popup also has an **Enabled** toggle to switch everything off without removing the extension.
 
