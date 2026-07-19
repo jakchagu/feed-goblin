@@ -19,7 +19,11 @@ Jump between cameras with a keypress, pick which camera you hear on the multi-vi
 
 ---
 
-<!-- 📸 SCREENSHOT SPOT #1: a multi-view with the grid control expanded. Replace this comment with:  ![Feed Goblin in action](assets/screenshot.png)  -->
+<p align="center">
+  <img src="assets/demo-expanded.png" alt="The Feed Goblin control on a multi-view grid" width="100%">
+  <br>
+  <em>Demo composite — AI-generated imagery.</em>
+</p>
 
 ## ✨ Features
 
@@ -54,7 +58,9 @@ This repository (`github.com/jakchagu/feed-goblin`) is the only place I've uploa
 4. **Click "Load unpacked"** and pick the unzipped folder (the one containing `manifest.json`).
 5. **Pin it** so the popup is easy to reach (puzzle-piece icon → pin).
 
-<!-- 📸 SCREENSHOT SPOT #2: the chrome://extensions page with Developer mode + Load unpacked highlighted -->
+<p align="center">
+  <img src="assets/install-dev-mode.png" alt="chrome://extensions with Developer mode and Load unpacked highlighted" width="100%">
+</p>
 
 **Updating later:** download the latest files, then click the **reload ↻** icon on Feed Goblin's card in `chrome://extensions`.
 
