@@ -66,6 +66,10 @@ Feed Goblin isn't on the Chrome Web Store, so you load it manually. This reposit
 9. Click the **Select Folder** button.
 10. Pin the extension (puzzle-piece icon → pin).
 
+<p align="center">
+  <img src="assets/pin_ext.png" alt="pin the extension after clicking the puzzle icon to the right of your URL bar" width="100%">
+</p>    
+
 **Updating later:** download the latest files, then click the **reload ↻** icon on Feed Goblin's card in `chrome://extensions`.
 
 ---
