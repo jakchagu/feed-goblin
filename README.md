@@ -80,7 +80,7 @@ Feed Goblin isn't on the Chrome Web Store, so you load it manually. This reposit
 2. Start any camera, or the multi-view.
 3. Use the hotkeys:
 
-![#c5f015] NOTE: the sound will remember to be on next load, but the first time you need to unmute the feeds.
+<span style="color:#d9c314">This text uses a green hex code</span> NOTE: the sound will remember to be on next load, but the first time you need to unmute the feeds. </span>
 
    | Key | Action |
    |-----|--------|
