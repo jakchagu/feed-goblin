@@ -80,6 +80,8 @@ Feed Goblin isn't on the Chrome Web Store, so you load it manually. This reposit
 2. Start any camera, or the multi-view.
 3. Use the hotkeys:
 
+NOTE: the sound will remember to be on next load, but the first time you need to unmute the feeds.
+
    | Key | Action |
    |-----|--------|
    | `1`–`4` | Switch to camera 1–4 |
