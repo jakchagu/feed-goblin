@@ -55,8 +55,8 @@ Feed Goblin isn't on the Chrome Web Store, so you load it manually. This reposit
 3. Click **Extract**.
 4. Open `chrome://extensions` (or `edge://extensions`).
 
-<p align="center">
-  <img src="assets/install-dev-mode.png" alt="chrome://extensions with Developer mode and Load unpacked highlighted" width="100%">
+<p align="left">
+  <img src="assets/install-dev-mode.png" alt="chrome://extensions with Developer mode and Load unpacked highlighted" width="50%">
 </p>
 
 5. Turn on **Developer mode** (top-right).
