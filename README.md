@@ -54,9 +54,11 @@ Feed Goblin isn't on the Chrome Web Store, so you load it manually. This reposit
 2. Right-click the downloaded ZIP → **Extract All...**
 3. Click **Extract**.
 4. Open `chrome://extensions` (or `edge://extensions`).
+
 <p align="center">
   <img src="assets/install-dev-mode.png" alt="chrome://extensions with Developer mode and Load unpacked highlighted" width="100%">
 </p>
+
 5. Turn on **Developer mode** (top-right).
 6. Click **Load unpacked**.
 7. Navigate to the folder you extracted/unzipped.
